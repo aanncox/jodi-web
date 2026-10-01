@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Survei HP Komunitas</title>
+<meta name="description" content="Survei merek smartphone dan kebiasaan memakai HP di komunitas kita.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#070707;--cream:#fbefd0;--text:#f1ece4;--mute:#b9b2a8;--lime:#d4dc2a;--line:rgba(255,255,255,.28);--glass:rgba(255,255,255,.10);--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:Raleway,system-ui,sans-serif;background:linear-gradient(#f7e3ad,#7f93a8);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+.page{max-width:1200px;margin:0 auto;background:var(--ink);position:relative;overflow:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+h1,h2,h3,.display{font-family:Rajdhani,sans-serif;font-weight:700}
+
+/* NAV */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1056px,calc(100% - 28px));z-index:50;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-radius:14px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .4s,box-shadow .4s}
+.nav.solid{background:rgba(18,16,18,.72);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:600;letter-spacing:.08em;font-size:15px}
+.logo svg{width:26px;height:26px}
+.links{display:flex;gap:30px;font-size:15px}
+.links a{opacity:.85;transition:opacity .2s,color .2s}.links a:hover{opacity:1;color:var(--lime)}
+.pill{border:1.5px solid rgba(255,255,255,.8);border-radius:999px;padding:3px 24px;font-size:15px;transition:background .25s,color .25s}
+.pill:hover{background:#fff;color:#111}
+
+/* HERO */
+.hero{position:relative;height:700px;background:linear-gradient(180deg,#f3d58f 0%,#e9a85a 28%,#8a6a6a 55%,#2a2128 80%,var(--ink) 100%)}
+.sun{position:absolute;left:22%;top:130px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,244,200,.95),rgba(255,214,130,.35) 45%,transparent 70%);filter:blur(6px)}
+.mtn{position:absolute;left:0;bottom:0;width:100%;height:100%;will-change:transform}
+.hero h1{position:absolute;top:92px;left:0;right:0;text-align:center;font-size:clamp(64px,15vw,180px);line-height:1;letter-spacing:.04em;color:var(--cream);opacity:.9;z-index:2;white-space:nowrap}
+.hero h1 span{display:inline-block;opacity:0;transform:translateY(40px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.social{position:absolute;right:50px;top:170px;display:flex;flex-direction:column;gap:20px;z-index:3}
+.social a{width:20px;height:20px;opacity:.85;transition:transform .25s,opacity .25s}.social a:hover{transform:scale(1.2);opacity:1}
+.social svg,.fsocial svg{width:100%;height:100%;fill:none;stroke:#fff;stroke-width:1.6}
+.phone{position:absolute;right:11%;top:270px;width:190px;z-index:3;animation:float 6s ease-in-out infinite;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+@keyframes float{50%{transform:translateY(-16px) rotate(1.5deg)}}
+.stats{position:absolute;left:53px;bottom:90px;display:flex;gap:17px;z-index:4;padding-right:20px}
+.stat{isolation:isolate;width:104px;height:188px;border-radius:6px;padding:10px 8px;display:flex;flex-direction:column;justify-content:flex-end;font-size:15px;line-height:1.25;position:relative;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.45);opacity:0;transform:translateY(30px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.stat:nth-child(1){animation-delay:.5s}.stat:nth-child(2){animation-delay:.62s}.stat:nth-child(3){animation-delay:.74s}.stat:nth-child(4){animation-delay:.86s}.stat:nth-child(5){animation-delay:.98s}
+.stat b{font-family:Rajdhani,sans-serif;font-size:34px;line-height:1;display:block;margin-bottom:2px;word-break:break-word}
+.stat b.sm{font-size:21px}
+.stat::before{content:"";position:absolute;inset:0;z-index:-1}
+.stat:nth-child(1)::before{background:linear-gradient(160deg,#2c5f8a,#12263b)}
+.stat:nth-child(2)::before{background:linear-gradient(160deg,#6b6f78,#1b1c20)}
+.stat:nth-child(3)::before{background:linear-gradient(160deg,#3a78b5,#1a2b4a)}
+.stat:nth-child(4)::before{background:linear-gradient(160deg,#a8321f,#2a0f0c)}
+.stat:nth-child(5)::before{background:linear-gradient(160deg,#6a4a2c,#1a120c)}
+.book-hero{position:absolute;right:53px;bottom:112px;width:204px;text-align:center;padding:4px 0;background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,.85));border-radius:3px;color:#111;font-size:19px;z-index:5;transition:transform .25s}
+.book-hero:hover{transform:translateY(-3px)}
+
+/* SECTION */
+section{position:relative;padding:0 53px}
+.title{display:flex;align-items:center;gap:0;margin:30px 0 70px}
+.title::before,.title::after{content:"";height:1.5px;background:var(--line);flex:1;transform:scaleX(0);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.title::before{transform-origin:left}.title::after{transform-origin:right}
+.title.in::before,.title.in::after{transform:scaleX(1)}
+.title h2{font-size:clamp(40px,6vw,62px);color:#9b9894;letter-spacing:.03em;padding:0 4px;line-height:1.1;text-transform:uppercase}
+.title.left::before{display:none}.title.right::after{display:none}
+.hi{color:var(--lime)}
+.about{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;padding-bottom:110px}
+.about p{font-size:17px;max-width:360px;line-height:1.35}
+.about .col{display:flex;flex-direction:column;justify-content:space-between;gap:80px}
+.tl{position:relative;padding:10px 0}
+.tl::before{content:"";position:absolute;left:50%;top:18px;bottom:0;width:1.5px;background:var(--line);transform-origin:top;transform:scaleY(0);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.tl.in::before{transform:scaleY(1)}
+.step{display:grid;grid-template-columns:1fr 26px 1fr;align-items:start;gap:0;margin-bottom:96px;min-height:90px}
+.step:last-child{margin-bottom:0}
+.step .dot{width:18px;height:18px;border-radius:50%;background:#d8d8d8;margin:4px auto 0;position:relative;z-index:2;box-shadow:0 0 0 6px rgba(255,255,255,.06)}
+.step .t{font-size:15px;color:#ddd}.step .t b{display:block;font-family:Rajdhani,sans-serif;font-size:25px;color:#fff;line-height:1.1}
+.step .l{text-align:right;padding-right:14px}.step .r{padding-left:14px}
+.step.flip .l{order:3;text-align:left;padding:0 0 0 14px}.step.flip .dot{order:2}.step.flip .r{order:1;text-align:right;padding:0 14px 0 0}
+.ph{display:block;border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.5);overflow:hidden;width:110px;height:74px;margin-top:8px}
+.ph svg{width:100%;height:100%;display:block}
+.ph.big{width:134px;height:90px}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:50px}
+.card{border:1.2px solid rgba(255,255,255,.4);border-radius:14px;padding:16px 18px 20px;min-height:178px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));transition:transform .35s,border-color .35s,background .35s}
+.card:hover{transform:translateY(-5px);border-color:var(--lime)}
+.card h3{display:flex;align-items:center;gap:12px;font-family:Raleway,sans-serif;font-weight:600;font-size:22px;margin-bottom:10px}
+.card h3 svg{width:28px;height:28px;stroke:var(--lime);fill:none;stroke-width:1.5;flex:none}
+.card p{font-size:16px;line-height:1.3;color:#e3ddd3}
+
+/* RESULTS */
+.res{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-bottom:70px}
+.panel{border:1.2px solid rgba(255,255,255,.3);border-radius:16px;padding:24px;background:rgba(255,255,255,.04)}
+.panel h3{font-size:26px;margin-bottom:4px}.panel .sub{font-size:14px;color:var(--mute);margin-bottom:18px}
+.bar{margin-bottom:13px}
+.bar .row{display:flex;justify-content:space-between;font-size:15px;margin-bottom:5px}
+.bar .row span:last-child{color:var(--mute)}
+.bar .track{height:9px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar .fill{height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#e9a85a,var(--lime));transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+.empty{color:var(--mute);font-size:15px;padding:16px 0}
+.badge{display:inline-block;font-size:12px;border:1px solid var(--lime);color:var(--lime);border-radius:99px;padding:2px 12px;margin-bottom:14px}
+
+/* FORM */
+.contact{position:relative;overflow:hidden;padding:90px 53px 120px;background:radial-gradient(60% 50% at 80% 60%,rgba(190,90,90,.35),transparent 70%),radial-gradient(50% 40% at 10% 20%,rgba(214,150,170,.3),transparent 70%),linear-gradient(180deg,var(--ink),#241a24 40%,#3a2c3c)}
+.contact .pagoda{position:absolute;right:30px;bottom:60px;width:min(380px,40%);opacity:.9}
+.form{position:relative;z-index:2;max-width:466px;border-radius:18px;padding:32px 36px 36px;background:rgba(255,255,255,.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.14)}
+.form h2{font-family:Raleway,sans-serif;font-weight:300;font-size:28px;line-height:1.2;margin-bottom:22px}
+.form .lead{font-size:20px;margin:0 0 6px 6px}
+.f{margin-bottom:16px}
+.f label{display:block;font-size:14px;color:#d9d3cb;margin-bottom:2px}
+.f input,.f select,.f textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.55);color:#fff;font:inherit;font-size:16px;padding:7px 0;outline:0;border-radius:0;transition:border-color .25s}
+.f select option{color:#111}
+.f textarea{resize:vertical;min-height:54px}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--lime)}
+.f input::placeholder,.f textarea::placeholder{color:#c9c2b8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rate{position:relative;display:flex;gap:8px;margin-top:6px}
+.rate input{position:absolute;opacity:0;pointer-events:none}
+.rate label{margin:0;width:42px;height:38px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.5);border-radius:8px;cursor:pointer;color:#fff;font-size:16px;transition:all .2s}
+.rate input:checked+label{background:var(--lime);color:#111;border-color:var(--lime);transform:translateY(-2px)}
+.rate input:focus-visible+label{outline:2px solid var(--lime);outline-offset:2px}
+.hp{position:absolute;left:-9999px;opacity:0}
+.send{width:100%;border:0;border-radius:3px;background:#fff;color:#111;font:inherit;font-size:19px;padding:5px;cursor:pointer;margin-top:6px;transition:transform .2s,background .2s,opacity .2s}
+.send:hover{background:var(--lime);transform:translateY(-2px)}
+.send:disabled{opacity:.6;cursor:wait;transform:none}
+.msg{margin-top:12px;font-size:14px;min-height:20px}
+.msg.ok{color:#b8f0b0}.msg.err{color:#ffb4a8}
+.fsocial{position:absolute;right:50px;bottom:24px;display:flex;gap:22px;z-index:3}
+.fsocial a{width:22px;height:22px}
+
+footer{position:relative;background:#3a2c3c;padding:0 53px 22px}
+footer .nav2{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-radius:14px;background:rgba(255,255,255,.08)}
+
+/* REVEAL */
+[data-r]{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);will-change:opacity,transform}
+[data-r="left"]{transform:translateX(-40px)}[data-r="right"]{transform:translateX(40px)}[data-r="zoom"]{transform:scale(.92)}
+[data-r].in{opacity:1;transform:none}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,40px);background:#fff;color:#111;border-radius:12px;padding:12px 22px;font-size:15px;opacity:0;pointer-events:none;transition:all .45s cubic-bezier(.2,.7,.2,1);z-index:99;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:960px){
+ .links{display:none}
+ .hero{height:760px}.phone{right:6%;top:250px;width:150px}
+ .stats{left:20px;right:20px;overflow-x:auto;bottom:130px;padding-bottom:6px;scrollbar-width:none}.stats::-webkit-scrollbar{display:none}.stat{flex:none}
+ .book-hero{right:20px;bottom:76px}
+ section,.contact,footer{padding-left:20px;padding-right:20px}
+ .about,.res{grid-template-columns:1fr}.about .col{gap:30px}.cards{grid-template-columns:1fr 1fr}
+ .contact .pagoda{opacity:.25;width:70%}.social{right:20px}
+}
+@media(max-width:560px){
+ .cards{grid-template-columns:1fr}.two{grid-template-columns:1fr}.form{padding:26px 22px}
+ .pill{padding:3px 16px}.title h2{font-size:34px}.hero h1{top:110px}.phone{display:none}
+ .step .t b{font-size:21px}.ph{width:84px;height:58px}.ph.big{width:96px;height:66px}.fsocial{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}[data-r],.stat,.hero h1 span{opacity:1!important;transform:none!important}.fill{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8"/></symbol>
+<symbol id="fb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M13.5 20v-7h2.3l.4-2.7h-2.7V8.6c0-.8.3-1.3 1.4-1.3h1.4V5a15 15 0 0 0-2-.1c-2.1 0-3.5 1.3-3.5 3.6v1.8H8.5V13h2.3v7"/></symbol>
+<symbol id="tg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7 12.2l9-3.6-1.5 7.2-3-2.2-1.6 1.5-.2-2.6z"/></symbol>
+<symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#fff" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4.2" ry="10" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M2 12h20M4 7h16M4 17h16" stroke="#fff" stroke-width="1.2" fill="none"/></symbol>
+</defs></svg>
+
+<div class="page">
+<header class="nav" id="nav">
+  <a class="logo" href="#top"><svg><use href="#globe"/></svg>PHONE POLL</a>
+  <nav class="links"><a href="#about">Tentang</a><a href="#hasil">Hasil</a><a href="#diukur">Diukur</a><a href="#survei">Kontak</a></nav>
+  <a class="pill" href="#survei">Isi Survei</a>
+</header>
+
+<div class="hero" id="top">
+  <div class="sun"></div>
+  <svg class="mtn" id="mtn" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs><linearGradient id="m1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b98a55"/><stop offset="1" stop-color="#d9a766" stop-opacity="0"/></linearGradient>
+    <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b5648"/><stop offset="1" stop-color="#8b6a5a" stop-opacity="0"/></linearGradient>
+    <linearGradient id="m3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3032"/><stop offset="1" stop-color="#2a2128" stop-opacity="0"/></linearGradient></defs>
+    <path d="M0 330 Q120 290 260 330 T520 320 Q640 270 780 300 T1000 250 Q1100 230 1200 280 V520 H0Z" fill="url(#m1)" opacity=".8"/>
+    <path d="M0 400 Q150 330 300 390 T600 360 Q760 300 900 350 T1200 330 V600 H0Z" fill="url(#m2)" opacity=".85"/>
+    <path d="M0 470 Q200 410 380 460 T760 440 Q980 400 1200 450 V700 H0Z" fill="url(#m3)"/>
+  </svg>
+  <h1 class="display" aria-label="HP SURVEY"><span style="animation-delay:.05s">H</span><span style="animation-delay:.12s">P</span> <span style="animation-delay:.2s">S</span><span style="animation-delay:.27s">U</span><span style="animation-delay:.34s">R</span><span style="animation-delay:.41s">V</span><span style="animation-delay:.48s">E</span><span style="animation-delay:.55s">Y</span></h1>
+  <div class="social"><a href="#" aria-label="Instagram"><svg><use href="#ig"/></svg></a><a href="#" aria-label="Facebook"><svg><use href="#fb"/></svg></a><a href="#" aria-label="Telegram"><svg><use href="#tg"/></svg></a></div>
+
+  <svg class="phone" viewBox="0 0 190 380" aria-hidden="true">
+    <defs><linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffcf7a"/><stop offset=".5" stop-color="#e8707a"/><stop offset="1" stop-color="#5a3f8a"/></linearGradient></defs>
+    <rect x="6" y="6" width="178" height="368" rx="30" fill="#1b1a1f" stroke="#cfc6b8" stroke-width="3"/>
+    <rect x="16" y="16" width="158" height="348" rx="22" fill="url(#scr)"/>
+    <rect x="70" y="24" width="50" height="12" rx="6" fill="#111"/>
+    <circle cx="95" cy="150" r="42" fill="rgba(255,255,255,.35)"/><circle cx="95" cy="150" r="26" fill="rgba(255,255,255,.55)"/>
+    <rect x="36" y="228" width="118" height="10" rx="5" fill="rgba(255,255,255,.7)"/><rect x="50" y="250" width="90" height="8" rx="4" fill="rgba(255,255,255,.45)"/>
+    <g fill="rgba(255,255,255,.5)"><rect x="34" y="296" width="30" height="30" rx="9"/><rect x="80" y="296" width="30" height="30" rx="9"/><rect x="126" y="296" width="30" height="30" rx="9"/></g>
+  </svg>
+
+  <div class="stats">
+    <div class="stat"><b data-count id="sTotal">0</b>responden<br>komunitas</div>
+    <div class="stat"><b data-count id="sBrand">0</b>merek HP<br>terdata</div>
+    <div class="stat"><b id="sHours">0</b>jam layar<br>per hari</div>
+    <div class="stat"><b class="sm" id="sTop">-</b>merek<br>terpopuler</div>
+    <div class="stat"><b id="sSat">0</b>skor<br>kepuasan</div>
+  </div>
+  <a class="book-hero" href="#survei">Isi Survei</a>
+</div>
+
+<section id="about">
+  <div class="title" data-io><h2 data-r>Tentang survei</h2></div>
+  <div class="about">
+    <div class="col">
+      <p data-r="left">Kami ingin tahu HP apa yang dipakai anggota forum ini dan bagaimana kamu memakainya. Survei singkat, hanya <span class="hi">2 menit</span> untuk mengisi.</p>
+      <p data-r="left" style="--d:.15s">Tidak perlu data rumit. Pilih merek, ceritakan kebiasaanmu, lalu kirim. Hasilnya langsung muncul di halaman ini, jadi kita semua bisa <span class="hi">melihat hasilnya bersama.</span></p>
+    </div>
+    <div class="tl" data-io>
+      <div class="step" data-r style="--d:.1s">
+        <div class="t l"><b>Langkah 1</b>Pilih merek HP</div><div class="dot"></div>
+        <div class="r"><span class="ph"><svg viewBox="0 0 110 74"><rect width="110" height="74" fill="#2d5f8f"/><rect x="40" y="10" width="30" height="54" rx="6" fill="#111" stroke="#ddd"/><rect x="43" y="14" width="24" height="44" rx="3" fill="#f0a35e"/></svg></span></div>
+      </div>
+      <div class="step flip" data-r style="--d:.15s">
+        <div class="t l"><b>Langkah 2</b>Ceritakan kebiasaanmu</div><div class="dot"></div>
+        <div class="r"><span class="ph big"><svg viewBox="0 0 134 90"><rect width="134" height="90" fill="#6a4a8a"/><circle cx="40" cy="45" r="22" fill="#e8707a"/><rect x="70" y="28" width="46" height="8" rx="4" fill="#ffd07a"/><rect x="70" y="46" width="34" height="8" rx="4" fill="#fff" opacity=".6"/></svg></span></div>
+      </div>
+      <div class="step" data-r style="--d:.2s">
+        <div class="t l"><b>Langkah 3</b>Kirim dan lihat hasil</div><div class="dot"></div>
+        <div class="r"><span class="ph"><svg viewBox="0 0 110 74"><rect width="110" height="74" fill="#1d2a44"/><rect x="14" y="40" width="16" height="24" fill="#e9a85a"/><rect x="40" y="24" width="16" height="40" fill="#d4dc2a"/><rect x="66" y="12" width="16" height="52" fill="#e8707a"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diukur">
+  <div class="title right" data-io><h2 data-r>Yang kami ukur</h2></div>
+  <div class="cards">
+    <div class="card" data-r style="--d:0s"><h3><svg viewBox="0 0 32 32"><rect x="9" y="3" width="14" height="26" rx="3"/><path d="M14 25h4"/></svg>Merek</h3><p>Merek dan model HP yang kamu pakai sekarang.</p></div>
+    <div class="card" data-r style="--d:.1s"><h3><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 9v7l5 3"/></svg>Durasi</h3><p>Berapa jam per hari layar HP-mu menyala.</p></div>
+    <div class="card" data-r style="--d:.2s"><h3><svg viewBox="0 0 32 32"><path d="M4 20l6-8 5 6 4-5 9 9z"/><circle cx="23" cy="9" r="2.5"/></svg>Aktivitas</h3><p>Kegiatan yang paling sering kamu lakukan di HP.</p></div>
+    <div class="card" data-r style="--d:.3s"><h3><svg viewBox="0 0 32 32"><path d="M16 4l3.6 7.6 8.4 1-6.2 5.7 1.7 8.2L16 22.4 8.5 26.5l1.7-8.2L4 12.6l8.4-1z"/></svg>Kepuasan</h3><p>Nilai 1 sampai 5 untuk HP yang kamu pakai.</p></div>
+  </div>
+</section>
+
+<section id="hasil">
+  <div class="title left" data-io><h2 data-r>Hasil survei</h2></div>
+  <div class="res">
+    <div class="panel" data-r="left">
+      <span class="badge" id="modeBadge" hidden>Data contoh</span>
+      <h3>Merek HP</h3><p class="sub">Jumlah anggota per merek</p><div id="brandBars"><p class="empty">Memuat data...</p></div>
+    </div>
+    <div class="panel" data-r="right" style="--d:.12s">
+      <h3>Aktivitas utama</h3><p class="sub">Yang paling sering dilakukan di HP</p><div id="actBars"><p class="empty">Memuat data...</p></div>
+      <h3 style="margin-top:22px">Rencana budget HP berikutnya</h3><p class="sub">Rentang harga yang dipilih</p><div id="budgetBars"></div>
+    </div>
+  </div>
+</section>
+
+<div class="contact" id="survei">
+  <svg class="pagoda" viewBox="0 0 300 420" aria-hidden="true" data-r="zoom">
+    <g fill="#8c2f2f"><rect x="146" y="10" width="8" height="50"/><path d="M60 110Q150 80 240 110L255 124H45Z"/><path d="M50 170Q150 136 250 170L270 186H30Z"/><path d="M40 240Q150 200 260 240L285 260H15Z"/><path d="M28 320Q150 276 272 320L298 344H2Z"/></g>
+    <g fill="#d9b8a0"><rect x="100" y="124" width="100" height="44"/><rect x="92" y="188" width="116" height="50"/><rect x="80" y="262" width="140" height="56"/><rect x="66" y="346" width="168" height="64"/></g>
+    <g fill="#5b2323"><rect x="120" y="134" width="14" height="30"/><rect x="166" y="134" width="14" height="30"/><rect x="110" y="200" width="16" height="34"/><rect x="174" y="200" width="16" height="34"/></g>
+  </svg>
+  <form class="form" id="form" novalidate data-r="left">
+    <h2>Mau ikut survei,<br>tapi masih ada pertanyaan?</h2>
+    <p class="lead">Isi survei di sini</p>
+    <div class="f"><label for="nama">Nama atau nickname</label><input id="nama" name="nama" required maxlength="60" autocomplete="nickname" placeholder="Nama kamu"></div>
+    <div class="two">
+      <div class="f"><label for="merek">Merek HP</label><select id="merek" name="merek" required><option value="">Pilih merek</option><option>Samsung</option><option>Apple</option><option>Xiaomi</option><option>POCO</option><option>OPPO</option><option>vivo</option><option>realme</option><option>Infinix</option><option>TECNO</option><option>Google Pixel</option><option>Lainnya</option></select></div>
+      <div class="f"><label for="model">Tipe atau model</label><input id="model" name="model" required maxlength="60" placeholder="Contoh: Galaxy A55"></div>
+    </div>
+    <div class="two">
+      <div class="f"><label for="jam">Pemakaian layar per hari</label><select id="jam" name="jam" required><option value="">Pilih durasi</option><option value="1">Kurang dari 2 jam</option><option value="3">2 sampai 4 jam</option><option value="5">4 sampai 6 jam</option><option value="7">6 sampai 8 jam</option><option value="9">Lebih dari 8 jam</option></select></div>
+      <div class="f"><label for="aktivitas">Aktivitas utama</label><select id="aktivitas" name="aktivitas" required><option value="">Pilih aktivitas</option><option>Media sosial</option><option>Chat dan komunikasi</option><option>Streaming video</option><option>Gaming</option><option>Belajar atau kerja</option><option>Fotografi</option></select></div>
+    </div>
+    <div class="f"><label for="budget">Budget HP berikutnya</label><select id="budget" name="budget" required><option value="">Pilih budget</option><option>Di bawah 2 juta</option><option>2 sampai 5 juta</option><option>5 sampai 10 juta</option><option>Di atas 10 juta</option></select></div>
+    <div class="f"><label id="rlabel">Kepuasan dengan HP sekarang</label>
+      <div class="rate" role="radiogroup" aria-labelledby="rlabel">
+        <input type="radio" name="kepuasan" id="k1" value="1"><label for="k1">1</label><input type="radio" name="kepuasan" id="k2" value="2"><label for="k2">2</label><input type="radio" name="kepuasan" id="k3" value="3"><label for="k3">3</label><input type="radio" name="kepuasan" id="k4" value="4"><label for="k4">4</label><input type="radio" name="kepuasan" id="k5" value="5"><label for="k5">5</label>
+      </div></div>
+    <div class="f"><label for="komentar">Komentar (opsional)</label><textarea id="komentar" name="komentar" maxlength="300" placeholder="Ceritakan pengalamanmu"></textarea></div>
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="send" id="send" type="submit">Kirim</button>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </form>
+  <div class="fsocial"><a href="#" aria-label="Instagram"><svg><use href="#ig"/></svg></a><a href="#" aria-label="Facebook"><svg><use href="#fb"/></svg></a><a href="#" aria-label="Telegram"><svg><use href="#tg"/></svg></a></div>
+</div>
+
+<footer>
+  <div class="nav2">
+    <a class="logo" href="#top"><svg><use href="#globe"/></svg>PHONE POLL</a>
+    <nav class="links"><a href="#about">Tentang</a><a href="#hasil">Hasil</a><a href="#diukur">Diukur</a><a href="#survei">Kontak</a></nav>
+    <a class="pill" href="#survei">Isi Survei</a>
+  </div>
+</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
